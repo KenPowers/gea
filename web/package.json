@@ -15,5 +15,8 @@
     "pg": "0.15.1",
     "db-migrate": "0.4.1",
     "async": "0.2.6"
+  },
+  "devDependencies": {
+    "chai": "1.5.0"
   }
 }
