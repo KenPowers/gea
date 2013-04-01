@@ -27,6 +27,24 @@ app.configure(function () {
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+  // Attach pg to request object for easy mocking / testing
+  app.use((function () {
+    // Require pg and config
+    var pg = require('pg');
+    var config = require('./db/database.json')[process.env.NODE_ENV === 'production' ? 'prod' : 'dev'];
+    // Set configuration
+    pg.defaults.user = config.user;
+    pg.defaults.password = config.password;
+    pg.defaults.host = config.host;
+    pg.defaults.port = config.port;
+    pg.defaults.database = config.database;
+    pg.defaults.poolSize = config.max_connections;
+    // Return middleware
+    return function (req, res, next) {
+      req.dbConnect = pg.connect;
+      next();
+    }
+  })());
 });
 
 // Production configuration

@@ -1,11 +1,9 @@
 // requirements
-var pg = require('pg'),
-    async = require('async'),
+var async = require('async'),
     fs = require('fs'),
     path = require('path'),
     util = require('util'),
-    rdio = require('./util/rdio'),
-    config = require(path.join(__appDir, 'db/database.json'))[process.env.NODE_ENV === 'production' ? 'prod' : 'dev'];
+    rdio = require('./util/rdio');
 
 // import sql queries
 const DML_DIR = path.join(__appDir, 'db/dml');
@@ -20,21 +18,13 @@ const VERDICTS = {
   dislike: -1
 };
 
-// pg configuration
-pg.defaults.user = config.user;
-pg.defaults.password = config.password;
-pg.defaults.host = config.host;
-pg.defaults.port = config.port;
-pg.defaults.database = config.database;
-pg.defaults.poolSize = config.max_connections;
-
 // routes
 module.exports = {
   // POST /rate?from=<rdio>&id=<id>&verdict=<like|dislike>
   post: function (req, res) {
     var rdioId = req.query.id;
     var verdict = req.query.verdict;
-    pg.connect(function (err, client, done) {
+    req.dbConnect(function (err, client, done) {
       async.waterfall([
         function (next) {
           if (err) {
