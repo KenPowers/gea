@@ -6,6 +6,7 @@ define([
   './widgets/Loading',
   './widgets/SearchResult',
   './player',
+  'app/vent',
   'util/jqr!'
 ], function (
   bb,
@@ -13,7 +14,8 @@ define([
   searchResults,
   LoadingWidget,
   SearchResult,
-  player
+  player,
+  vent
 ) {
   // Store ./widgets/SearchResult views
   var resultViews = [];
@@ -21,14 +23,18 @@ define([
   // Reference sidebar element
   var $right = $('#right');
 
+  //Timeout thread for auto-search
+  var thread = null;
+
+  //Boolean to indicate that search should *not* auto-execute
+  var focused = false;
+
   return new (bb.View.extend({
     el: '#search',
     events: {
-      'keyup #search-input': 'keyup',
-      'click #top-trending': 'topTrendingClick'
+      'keyup #search-input': 'keyup'
     },
     initialize: function () {
-      this.$topTrending = this.$('#top-trending');
       this.$input = this.$('#search-input');
       this.$results = this.$('#search-results');
       this.listenTo(searchResults, 'reset', this.render);
@@ -37,40 +43,51 @@ define([
       this.resizeResults();
       player.$el.on('reflow', $.proxy(this.resizeResults, this));
       $(window).on('resize', $.proxy(this.resizeResults, this));
+      // Listen for the keyboard shortcut to focus the search input element
+      vent.on('focusSearch-shortcut', $.proxy(function () {
+        // 'keyup' catches the release from the 'enter' button, so
+        // prevent it from using that input as a reason to execute a search
+        focused = true;
+        this.$input.focus();
+      }, this));
     },
     keyup: function (e) {
-      if (e.keyCode !== constants.KEY_ENTER) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (focused) {
+        focused = false;
         return;
       }
-      e.preventDefault();
-      e.stopPropagation();
-      this.loadingWidget = new LoadingWidget();
-      this.emptyResults();
-      this.$results.append(this.loadingWidget.el);
-      var val = this.$input.val();
-      // Perform search
-      $.get('/rdio/search?query=' + val, function (data) {
-        searchResults.reset(data.result.results);
-      });
+      if (e.keyCode === constants.KEY_ENTER) {
+        clearTimeout(thread);
+        this.executeSearch();
+        return;
+      }
+      $.each(constants, $.proxy(function (key, val) {
+        if (val === e.keyCode) {
+          e.found = true;
+          return;
+        }
+      }, e));
+      if (e.found) return;
+      clearTimeout(thread);
+      thread = setTimeout($.proxy(function () { this.executeSearch(); }, this), 500);
     },
-    topTrendingClick: function (e) {
-      e.stopPropagation();
-      e.preventDefault();
-      $.get('/rate?limit=10', function (data) {
-        var alertText = '';
-        var counter = 1;
-        data.forEach($.proxy(function (d) {
-          var result = '';
-          if (d.title) result += '\'' + d.title + '\'';
-          if (d.artist) result += ' by ' + d.artist;
-          if (d.album) result += ' from \'' + d.album + '\'';
-          if (result) {
-            alertText += counter + '. ' + result + '\n';
-            counter++;
-          }
-        }, this));
-        alert(alertText);
-      });
+    executeSearch: function () {
+      var val = this.$input.val();
+      if (val.length > 1 && val[0].match(/[\w\d]/)) {
+        //Abort any current request
+        if (this.$req) this.$req.abort();
+        this.loadingWidget = new LoadingWidget();
+        this.emptyResults();
+        this.$results.append(this.loadingWidget.el);
+        // Perform search
+        this.$req = $.get('/rdio/search?query=' + val).done(function (data) {
+          searchResults.reset(data.result.results);
+        }).fail(function () {
+          searchResults.reset();
+        });
+      }
     },
     render: function () {
       // Remove loading indicator
@@ -94,7 +111,7 @@ define([
     // Set the height of the results
     resizeResults: function () {
       // New height is height of the right bar minus the player and input heights
-      this.$results.height($right.height() - player.$el.height() - this.$input.height() - this.$topTrending.height());
+      this.$results.height($right.height() - player.$el.height() - this.$input.height());
     }
   }))();
 });
