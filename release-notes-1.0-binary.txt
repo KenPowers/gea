@@ -1,0 +1,60 @@
+########## 1.0 Release - May 1, 2013 ##########
+
+##### Installation and Setup Instructions
+
+### Web Client
+Installation and Setup instructions for the web client and server are available in the same folder as these release notes.
+An online version of these instructions are also provided at [`AdministratorWebBuildInstructions-ubuntu.md`](AdministratorWebBuildInstructions-ubuntu.md).
+
+### Android App
+Installation instructions for the Android app are available under the `android` folder. An online version is also provided at [`android/README.md`](android/README.md).
+
+------------------------------------------------------------------------
+##### Usage
+
+### Web Client
+See the end of the Installation and Setup instructions for usage.
+
+### Android App
+See the instructions at [`android/README.md`](android/README.md).
+
+------------------------------------------------------------------------
+##### Features
+
+### Web Client
++Search capability for songs, artists, and albums
++Search results are distinguished by song, album, and artist with small icons
++Clicking on search results plays a thirty-second clip.
++Control playback (play, pause, next, previous, scrubbing)
++Displaying song metadata and album art
++Displaying top 10 songs per state on the map in a spiral formation, ordered by ranking
++Expandable marker clustering is used if the pins are too close on the map
++Displaying track position on a scrub-enabled progress bar
++Song approval communication (like/dislike) for currently playing song
++Map pins can be filtered based on time period via a drop-down selection
++Map pins show song details and can initiate playback when clicking on the album art in the pin window
++Users who have never visited are greeted with a brief tour to explain the features and functionality
++Keyboard shortcuts (described in [`web/README.md`](web/README.md)) control media playback
+
+### Android App
++Search capability for songs, artists, and albums
++Control playback (play, pause, next, previous)
++Volume control
++Scrubbing
++Displaying of song metadata
++Displaying of track position and duration
++Displaying album art
++Song approval communication (like/dislike) for currently playing song
++Displaying top 10 songs per state on the map with one pin per state
++Map pins can be filtered based on time period (top all time, top of the month, top of the week, etc.)
+
+------------------------------------------------------------------------
+##### Bugs and Issues
+
+### Web Client
+**None**
+
+### Android App
+**None**
+
+
