@@ -22,13 +22,11 @@ define([
     },
     initialize: function () {
       this.$select = this.$('#map-filter');
-      this.$loading = $('#map-loading');
       // Listen for a pinLoaded event to disable the loading widget
       vent.on('pinsLoaded', $.proxy(function () {
         this.removeLoadingWidget();
       }, this));
       this.createLoadingWidget();
-      //this.filterMap();
     },
     change: function (e) {
       e.preventDefault();
@@ -48,8 +46,9 @@ define([
     createLoadingWidget: function () {
       // Initialize the loading widget
       this.loadingWidget = new LoadingWidget();
-      // Append the loading widget to the page
-      this.$loading.append(this.loadingWidget.el);
+      // Append the loading widget to a new div on the page
+      $('body').prepend($('<div>').addClass('map-loading'));
+      $('.map-loading').append(this.loadingWidget.el);
     },
     removeLoadingWidget: function () {
       if (this.loadingWidget) {
@@ -57,6 +56,8 @@ define([
         this.loadingWidget.remove();
         delete this.loadingWidget;
       }
+      // Remove the div that held the loading widget
+      if ($('.map-loading')) $('.map-loading').remove();
     }
   }))();
 });
