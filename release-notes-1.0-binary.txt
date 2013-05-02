@@ -16,7 +16,8 @@ Installation instructions for the Android app are available under the `android` 
 See the end of the Installation and Setup instructions for usage.
 
 ### Android App
-See the instructions at [`android/README.md`](android/README.md).
+See the README.md at "android/README.md" for instructions to run the Android tests.
+This is also available online at https://github.com/OpenGea/gea/blob/master/android/README.md
 
 ------------------------------------------------------------------------
 ##### Features
