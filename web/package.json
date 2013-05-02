@@ -1,6 +1,6 @@
 {
   "name": "GEA",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node app",
