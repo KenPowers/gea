@@ -63,8 +63,10 @@ running [here](http://gea.kenpowers.net) (May 2nd, 2013).
 ##Tests
 
 To run the web server and client tests using `testem`.
+
 1. Install `testem` with `npm install -g testem`.
 2. Execute the tests with `testem` while in the `web/` folder.
+
 **Note: The server must be running before tests are executed.**
 
 ##1.0 Functionality:
