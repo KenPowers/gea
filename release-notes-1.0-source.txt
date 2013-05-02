@@ -6,9 +6,10 @@ Source code located at https://github.com/OpenGea/gea
 
 ### Web Client
 Installation and Setup instructions for the web client and server are available in the same folder as these release notes.
-An online version of these instructions are also provided at [`DeveloperWebBuildInstructions-ubuntu.md`](DeveloperWebBuildInstructions-ubuntu.md).
+An online version of these instructions are also provided at https://github.com/OpenGea/gea/blob/master/DeveloperWebBuildInstructions-ubuntu.md
 
 ### Android App
+Installation instructions for the Android app are available under the `android` folder. An online version is also provided at https://github.com/OpenGea/gea/blob/master/android/README.md
 
 ------------------------------------------------------------------------
 ##### Usage
@@ -17,16 +18,18 @@ An online version of these instructions are also provided at [`DeveloperWebBuild
 See the end of the Installation and Setup instructions for usage.
 
 ### Android App
-See the instructions at [`android/README.md`](android/README.md).
+See the instructions at android/README.md. An online version is also provided at https://github.com/OpenGea/gea/blob/master/android/README.md
 
 ------------------------------------------------------------------------
 ##### Tests
 
 ### Web Client
-See [`web/README.md`](web/README.md) for instructions to run the server and web client tests.
+See the README.md at "web/README.md" for instructions to run the server and web client tests.
+This is also available online at https://github.com/OpenGea/gea/blob/master/web/README.md
 
 ### Android App
-See [`android/README.md`](android/README.md) for instructions to run the Android tests.
+See the README.md at "android/README.md" for instructions to run the Android tests.
+This is also available online at https://github.com/OpenGea/gea/blob/master/android/README.md
 
 ------------------------------------------------------------------------
 ##### File Change Logs and Issue Tracking

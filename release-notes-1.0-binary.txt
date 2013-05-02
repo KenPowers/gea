@@ -4,10 +4,10 @@
 
 ### Web Client
 Installation and Setup instructions for the web client and server are available in the same folder as these release notes.
-An online version of these instructions are also provided at [`AdministratorWebBuildInstructions-ubuntu.md`](AdministratorWebBuildInstructions-ubuntu.md).
+An online version of these instructions are also provided at https://github.com/OpenGea/gea/blob/master/AdministratorWebBuildInstructions-ubuntu.md
 
 ### Android App
-Installation instructions for the Android app are available under the `android` folder. An online version is also provided at [`android/README.md`](android/README.md).
+Installation instructions for the Android app are available under the `android` folder. An online version is also provided at https://github.com/OpenGea/gea/blob/master/android/README.md
 
 ------------------------------------------------------------------------
 ##### Usage
