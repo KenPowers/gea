@@ -58,7 +58,7 @@ accessible from `http://localhost:3000/`. You must have the Adobe Flash plugin
 installed in your browser for the web client to function correctly. If you are
 running Ubuntu 12.10, you can install the plugin with `sudo apt-get -f install
 flashplugin-installer`. The current release of the web server and client are
-running [here](http://gea.kenpowers.net) (April 2nd, 2013).
+running [here](http://gea.kenpowers.net) (May 2nd, 2013).
 
 ##Tests
 
