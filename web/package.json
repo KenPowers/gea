@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "chai": "~1.5.0",
-    "zombie": "~2.0.0-alpha15"
+    "zombie": "~2.0.0-alpha15",
+    "sinon": "~1.6.0",
+    "acquire": "~1.0.0-alpha"
   }
 }

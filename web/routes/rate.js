@@ -1,12 +1,13 @@
 // requirements
-var _ = require('underscore'),
+var acquire = require('acquire'),
+    _ = require('underscore'),
     pg = require(__appDir + '/db/geaPg'),
     async = require('async'),
     fs = require('fs'),
     path = require('path'),
     util = require('util'),
-    request = require('request'),
-    rdio = require('./util/rdio');
+    request = acquire('request'),
+    rdio = acquire(__dirname + '/util/rdio');
 
 // import sql queries
 const DML_DIR = path.join(__appDir, 'db/dml');
@@ -79,15 +80,19 @@ module.exports = {
           }
         },
         function (data, next) {
-          request({url: 'http://freegeoip.net/json/' + req.ip}, function (err, resp, body) {
-            client.query({
-              name: 'insert_rating',
-              text: INSERT_RATING,
-              values: [data.rows[0].id, VERDICTS[req.query.verdict], JSON.parse(body).region_name]
-            }, next);
-          });
+          request({url: 'http://freegeoip.net/json/' + req.ip}, next);
+        },
+        function (resp, body, next) {
+          debugger;
+          console.log(arguments);
+          client.query({
+            name: 'insert_rating',
+            text: INSERT_RATING,
+            values: [data.rows[0].id, VERDICTS[req.query.verdict], JSON.parse(body).region_name]
+          }, next);
         }
       ], function (err, data) {
+        console.log('final');
         if (err) {
           res.json(500, err);
         } else {
