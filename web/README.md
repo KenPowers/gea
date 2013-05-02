@@ -67,14 +67,14 @@ To run the web server and client tests using `testem`.
 2. Execute the tests with `testem` while in the `web/` folder.
 **Note: The server must be running before tests are executed.**
 
-##BETA Functionality:
+##1.0 Functionality:
 
 * Server
     * REST Endpoint: `GET /rdio/getPlaybackToken`
         * Gets a playback token from Rdio which allows the client to play music.
     * REST Endpoint: `POST /rate?from=rdio&id=<id>&verdict=<like|dislike>`
         * Saves a rating to the database. Only supports Rdio right now. `<id>` is a track id from Rdio. `<like|dislike>` must be set to either `like` or `dislike`.
-    * REST Endpoint: `GET / recieve?[artist=<artist>[&album=<album>&title=<title>]][[&pastHours=<pastHours>]|[&timeStart=<timeStart>&timeEnd=<timeEnd>]][&limit=<limit>&offset=<offset>]`
+    * REST Endpoint: `GET /rate?[artist=<artist>[&album=<album>&title=<title>]][[&pastHours=<pastHours>]|[&timeStart=<timeStart>&timeEnd=<timeEnd>]][&limit=<limit>&offset=<offset>]`
         * Gets ratings from the database
         * `artist` is optional
         * If `artist` is specified, then `album || title` can be specified
@@ -82,10 +82,16 @@ To run the web server and client tests using `testem`.
         * `limit` will limit the number of results (defaults to 10, maximum 100)
         * `offset` will skip the first given number of results, useful for pagination
 * Client
-    * Allows user to search for songs.
+    * Allows user to search for songs, albums, and artists.
+    * Search results are distinguished by song, album, and artist with small icons.
     * When search results are clicked a thirty-second clip is played.
     * Users can like or dislike the currently playing song.
-    * The top 10 songs are available through a button in the player.
+    * The top 10 songs per state are visible on the map in a spiral formation, ordered by ranking.
+    * If the pins are too close, they are grouped under a cluster that can be expanded.
+    * Users can choose a time period to show the top 10 song ratings via a drop-down selection.
+    * Users can view song details for the top songs on the map and begin listening by clicking on the album art from the map pin.
+    * Users who have never visited are greeted with a brief tour to explain the features and functionality of the client.
+    * Users can use the keyboard shortcuts (listed above) to control media playback.
 
 ##Release notes
-See [`../release-notes_beta-binary.txt`](../release-notes_beta-binary.txt) and [`../release-notes_beta-source.txt`](../release-notes_beta-source.txt).
+See [`../release-notes-1.0-binary.txt`](../release-notes-1.0-binary.txt) and [`../release-notes-1.0-source.txt`](../release-notes-1.0-source.txt).
