@@ -30,4 +30,3 @@ getLib backbone.shortcuts.min.js https://raw.github.com/bry4n/backbone-shortcuts
 getLib markerclusterer_packed.js http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.9/src/markerclusterer_packed.js
 LIB_DIR='assets/styl/lib'
 getLib normalize.styl https://raw.github.com/KenPowers/normalize.styl/master/normalize.styl
-getLib joyride.css https://raw.github.com/zurb/joyride/master/joyride-2.0.3.css
